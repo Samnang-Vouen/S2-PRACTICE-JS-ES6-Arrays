@@ -68,12 +68,17 @@ function addProductToCart(productId) {
 function removeProductFromCart(productId) {
   // Write your code here
   const existingItem = SHOPPING_CART.find(item => item.id === productId);
+
   if(existingItem){
-    existingItem.quantity -= 1;
-  } else{
-    const index = SHOPPING_CART.indexOf(existingItem);
-    SHOPPING_CART.splice(index, 1);
-  }
+    if (existingItem.quantity > 1) {
+      existingItem.quantity -= 1;
+    }else{
+      const index = SHOPPING_CART.findIndex(item => item.id === productId);
+        if (index !== -1) {
+          SHOPPING_CART.splice(index, 1);
+        }
+    }
+  } 
 }
 
 // --------------------------------------------------------
